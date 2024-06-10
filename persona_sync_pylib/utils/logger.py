@@ -2,8 +2,8 @@ import requests
 from datetime import datetime
 from enum import Enum
 
-from .singleton import singleton
-from .environment import LOGGER_URL, LOGGER_TOKEN
+from persona_sync_pylib.utils.singleton import singleton
+from persona_sync_pylib.utils.environment import LOGGER_URL, LOGGER_TOKEN
 
 
 class LogLevel(Enum):

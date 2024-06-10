@@ -1,7 +1,7 @@
 from typing import Union
 import pika
 
-from persona_sync_pylib.utils.prompt_inputs import (
+from persona_sync_pylib.types.chat_agents import (
     QueueRequest,
     StateMachineQueueRequest,
 )

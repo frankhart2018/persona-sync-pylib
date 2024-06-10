@@ -1,5 +1,6 @@
 import pika
 from pika.adapters.blocking_connection import BlockingChannel
+
 from persona_sync_pylib.utils.environment import QUEUE_NAME, RABBIT_HOST, RABBIT_PORT
 
 
