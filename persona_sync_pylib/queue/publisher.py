@@ -1,9 +1,12 @@
 from typing import Union
 import pika
 
-from ..prompt_inputs import QueueRequest, StateMachineQueueRequest
-from ..environment import RABBIT_HOST, RABBIT_PORT, QUEUE_NAME
-from ..logger import Logger, LogLevel
+from persona_sync_pylib.utils.prompt_inputs import (
+    QueueRequest,
+    StateMachineQueueRequest,
+)
+from persona_sync_pylib.utils.environment import RABBIT_HOST, RABBIT_PORT, QUEUE_NAME
+from persona_sync_pylib.utils.logger import Logger, LogLevel
 
 
 def publish_message(message: Union[QueueRequest, StateMachineQueueRequest]) -> None:
