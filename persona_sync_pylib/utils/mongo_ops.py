@@ -1,13 +1,13 @@
 import pymongo
 from pymongo.collection import Collection
 from pymongo.results import UpdateResult
-from typing import Union, Optional, List
+from typing import Union, Optional, List, Dict, Any
 from bson.objectid import ObjectId
 import pydantic
 
 from .singleton import singleton
 from .environment import MONGO_HOST
-from .prompt_inputs import QueueRequest, StateMachineQueueRequest
+from .prompt_inputs import QAndA, QueueRequest, StateMachineQueueRequest
 from .environment import MONGO_DB_NAME, PROMPT_INPUTS_COLLECTION
 
 
@@ -56,3 +56,12 @@ class PromptInputDao:
                 return QueueRequest(**result)
             except pydantic.ValidationError:
                 return None
+
+    def update_questions_answers(
+        self, interaction_id: str, q_and_a_s: List[QAndA]
+    ) -> Dict[str, Any]:
+        return self.__collection.find_one_and_update(
+            {"_id": ObjectId(interaction_id)},
+            {"$set": {"q_and_a_s": q_and_a_s}},
+            return_document=True,
+        )
