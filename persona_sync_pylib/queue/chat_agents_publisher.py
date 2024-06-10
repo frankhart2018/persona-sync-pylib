@@ -9,7 +9,7 @@ from persona_sync_pylib.utils.environment import RABBIT_HOST, RABBIT_PORT, QUEUE
 from persona_sync_pylib.utils.logger import Logger, LogLevel
 
 
-def publish_message(message: Union[QueueRequest, StateMachineQueueRequest]) -> None:
+def publish_message(message: Union[QueueRequest, StateMachineQueueRequest]) -> bool:
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host=RABBIT_HOST, port=RABBIT_PORT)
     )
@@ -26,5 +26,7 @@ def publish_message(message: Union[QueueRequest, StateMachineQueueRequest]) -> N
         )
     except Exception as e:
         Logger().log(LogLevel.ERROR, f"Failed to publish message: {e}")
+        return False
 
     connection.close()
+    return True
