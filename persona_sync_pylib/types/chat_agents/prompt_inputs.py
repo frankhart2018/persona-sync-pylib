@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from enum import Enum
 from typing import Optional, List
+from bson.objectid import ObjectId
 
 
 class PromptState(Enum):
@@ -26,6 +27,7 @@ class QueueRequest(BaseModel):
 class QAndA(BaseModel):
     question: str
     answer: Optional[str] = ""
+    obj_id: Optional[str] = str(ObjectId())
 
 
 class StateMachineQueueRequest(QueueRequest):
