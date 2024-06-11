@@ -1,26 +1,22 @@
-from typing import Union
 import pika
+from pydantic import BaseModel
 
-from persona_sync_pylib.types.chat_agents import (
-    QueueRequest,
-    StateMachineQueueRequest,
-)
-from persona_sync_pylib.utils.environment import RABBIT_HOST, RABBIT_PORT, QUEUE_NAME
+from persona_sync_pylib.utils.environment import RABBIT_HOST, RABBIT_PORT
 from persona_sync_pylib.utils.logger import Logger, LogLevel
 
 
-def publish_message(message: Union[QueueRequest, StateMachineQueueRequest]) -> bool:
+def publish_message(message: BaseModel, queue_name: str) -> bool:
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host=RABBIT_HOST, port=RABBIT_PORT)
     )
     channel = connection.channel()
 
-    channel.queue_declare(queue=QUEUE_NAME, durable=True)
+    channel.queue_declare(queue=queue_name, durable=True)
 
     try:
         channel.basic_publish(
             exchange="",
-            routing_key=QUEUE_NAME,
+            routing_key=queue_name,
             body=message.model_dump_json(),
             properties=pika.BasicProperties(delivery_mode=pika.DeliveryMode.Persistent),
         )

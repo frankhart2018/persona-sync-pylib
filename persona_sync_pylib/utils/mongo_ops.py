@@ -1,9 +1,5 @@
 import pymongo
 from pymongo.collection import Collection
-from pymongo.results import UpdateResult
-from typing import Union, Optional, List, Dict, Any
-from bson.objectid import ObjectId
-import pydantic
 
 from .singleton import singleton
 from .environment import MONGO_HOST
