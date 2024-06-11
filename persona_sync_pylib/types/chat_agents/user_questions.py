@@ -7,4 +7,5 @@ class UserQuestion(BaseModel):
     question: str
     question_embedding: List[float]
     question_id: str
+    interaction_id: str
     answer: Optional[str] = ""
