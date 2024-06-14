@@ -19,6 +19,7 @@ class PromptState(Enum):
 class QueueRequest(BaseModel):
     input: str
     state: PromptState
+    interaction_id: Optional[str] = ""
 
     class Config:
         use_enum_values = True
@@ -38,5 +39,4 @@ class StateMachineQueueRequest(QueueRequest):
     target: str
     q_and_a_s: Optional[List[QAndA]] = []
     previous_response: Optional[str] = ""
-    interaction_id: Optional[str] = ""
     interaction_length: Optional[int] = 0
