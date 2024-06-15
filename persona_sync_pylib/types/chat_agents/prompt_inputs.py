@@ -15,6 +15,9 @@ class PromptState(Enum):
     # Singular prompt, not part of chat agents
     PROMPT = "PROMPT"
 
+    # Singular embedding state, not part of chat agents
+    EMBED = "EMBED"
+
 
 class QueueRequest(BaseModel):
     input: str
