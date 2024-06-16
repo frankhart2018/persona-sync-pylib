@@ -8,7 +8,7 @@ class UserMatchingState(Enum):
     MATCH = "MATCH"
 
 
-class UserEntry:
+class UserEntry(BaseModel):
     user_id: str
     user_summary_embedding: List[float]
 
